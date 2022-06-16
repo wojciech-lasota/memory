@@ -67,7 +67,6 @@ function createBoard() {
     grid.appendChild(card);
   }
 }
-createBoard();
 
 function chechMatch() {
   //   const cards = document.querySelectorAll("img");
@@ -76,9 +75,9 @@ function chechMatch() {
   const optionTwoId = cardsChosenIds[1];
 
   if (optionOneId == optionTwoId) {
-    alert("same image clickd");
-  }
-  if (cardsChosen[0] == cardsChosen[1]) {
+    cards[optionOneId].setAttribute("src", "images/blank.png");
+    cards[optionTwoId].setAttribute("src", "images/blank.png");
+  } else if (cardsChosen[0] == cardsChosen[1]) {
     cards[optionOneId].setAttribute("src", "images/white.png");
     cards[optionTwoId].setAttribute("src", "images/white.png");
     cards[optionOneId].removeEventListener("click", flipCard);
@@ -88,8 +87,13 @@ function chechMatch() {
     cards[optionOneId].setAttribute("src", "images/blank.png");
     cards[optionTwoId].setAttribute("src", "images/blank.png");
   }
+  result.textContent = cardWon.length;
   cardsChosen = [];
   cardsChosenIds = [];
+
+  if (cardWon.length == cardArray.length / 2) {
+    result.innerHTML = "You found them all";
+  }
 }
 
 function flipCard() {
@@ -103,3 +107,4 @@ function flipCard() {
     setTimeout(chechMatch, 500);
   }
 }
+createBoard();
